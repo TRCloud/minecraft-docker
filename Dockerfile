@@ -48,6 +48,7 @@ RUN if [ "${TYPE}" = "python" ]; then \
     apt-get autoremove -y; \
     apt-get clean;
 
+RUN useradd -d /home/container -m container;
 USER container
 ENV USER=container HOME=/home/container
 
