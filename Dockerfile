@@ -6,7 +6,8 @@ FROM ${IMAGE_BASE}:${JAVA}-latest
 RUN sed \
         -i.bak \
         -e 's/deb.debian.org/mirrors.cernet.edu.cn/g' \
-        /etc/apt/sources.list.d/debian.sources; \
+        -e 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' \
+        /etc/apt/sources.list; \
     apt-get update -y; \
     apt-get install -y -f curl ca-certificates openssl git tar sqlite3 fontconfig tzdata iproute2 gettext-base wget;
 
