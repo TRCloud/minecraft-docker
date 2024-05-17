@@ -7,9 +7,9 @@ from typing import Iterator, NamedTuple
 
 
 class Context(NamedTuple):
+    java: str
     type: str
     mcdr: str
-    java: str
     tag: str
 
 
@@ -18,11 +18,11 @@ def iterate_all() -> Iterator[Context]:
         for type in ["general", "mcdr"]:
             if type == "general":
                 tag = f"bluefunny/minecraft:{type}-j{java}"
-                yield Context(type, str(java), tag)
+                yield Context(java=java, type=type, mcdr="", tag=tag)
             if type == "mcdr":
                 for mcdr in ["latest", "2.12", "2.11", "2.10"]:
                     tag = f"bluefunny/minecraft:{type}-j{java}-{mcdr}"
-                    yield Context(type, str(java), mcdr, tag)
+                    yield Context(java=java, type=type, mcdr=mcdr, tag=tag)
 
 
 def cmd_build(args: argparse.Namespace):
@@ -42,12 +42,13 @@ def cmd_build(args: argparse.Namespace):
             "-t",
             ctx.tag,
             "--build-arg",
-            f"SYSTEM={ctx.system}",
+            f"TYPE={ctx.type}",
             "--build-arg",
-            f"VERSION={ctx.version}",
+            f"JAVA={ctx.java}",
             "--build-arg",
-            f"PYTHON_VERSION={ctx.python}",
+            f"MCDR={ctx.mcdr}",
         ]
+
         if args.http_proxy is not None:
             cmd.extend(
                 [
@@ -57,6 +58,7 @@ def cmd_build(args: argparse.Namespace):
                     f"https_proxy={args.http_proxy}",
                 ]
             )
+
         subprocess.check_call(cmd)
 
         if args.push:
