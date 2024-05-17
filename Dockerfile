@@ -14,7 +14,7 @@ RUN sed \
 # Install Python 3.12 for MCDR
 ARG TYPE
 ARG PYTHON=3.12.3
-RUN if [ "${TYPE}" = "python" ]; then \
+RUN if [ "${TYPE}" = "mcdr" ]; then \
         apt-get install -y build-essential libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev; \
         cd /tmp; \
         wget https://www.python.org/ftp/python/${PYTHON}/Python-${PYTHON}.tgz; \
@@ -29,7 +29,7 @@ RUN if [ "${TYPE}" = "python" ]; then \
 COPY requirements.txt /requirements.txt 
 ARG TYPE
 ARG MCDR_REQUIREMENT=mcdreforged
-RUN if [ "${TYPE}" = "python" ]; then \
+RUN if [ "${TYPE}" = "mcdr" ]; then \
         python3.12 -m pip install -U pip; \
         python3.12 -m pip install ${MCDR_REQUIREMENT}; \
         python3.12 -m pip install -r /requirements.txt; \
@@ -37,7 +37,7 @@ RUN if [ "${TYPE}" = "python" ]; then \
 
 # Clean up
 ARG TYPE
-RUN if [ "${TYPE}" = "python" ]; then \
+RUN if [ "${TYPE}" = "mcdr" ]; then \
         cd /tmp; \
         python3.12 -m pip cache purge; \
         rm -rf /requirements.txt; \
