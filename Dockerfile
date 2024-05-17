@@ -23,7 +23,7 @@ RUN if [ "${TYPE}" = "python" ]; then \
         ./configure --enable-optimizations; \
         make -j 8; \
         make altinstall; \
-    fi
+    fi;
 
 # Install MCDR and requirements
 COPY requirements.txt /requirements.txt 
@@ -33,7 +33,7 @@ RUN if [ "${TYPE}" = "python" ]; then \
         python3 -m pip install -U pip; \
         pip3 install ${MCDR_REQUIREMENT}; \
         pip3 install -r /requirements.txt; \
-    fi
+    fi;
 
 # Clean up
 ARG TYPE
@@ -44,7 +44,7 @@ RUN if [ "${TYPE}" = "python" ]; then \
         rm -rf /tmp/Python-${PYTHON}; \
         rm -rf /tmp/Python-${PYTHON}.tgz; \
         apt-get remove -y build-essential libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev; \
-    fi \
+    fi; \
     apt-get autoremove -y; \
     apt-get clean;
 
