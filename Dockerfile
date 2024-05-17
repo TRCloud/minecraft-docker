@@ -9,6 +9,7 @@ RUN sed \
         -e 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' \
         /etc/apt/sources.list; \
     apt-get update -y; \
+    apt-get upgrade -y; \
     apt-get install -y -f curl ca-certificates openssl git tar sqlite3 fontconfig tzdata iproute2 gettext-base wget;
 
 # Install Python 3.12 for MCDR
