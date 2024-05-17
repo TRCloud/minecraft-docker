@@ -2,13 +2,8 @@ ARG IMAGE_BASE=azul/zulu-openjdk-debian
 ARG JAVA
 FROM ${IMAGE_BASE}:${JAVA}-latest
 
-# Change mirrors
-RUN sed \
-        -i.bak \
-        -e 's/deb.debian.org/mirrors.cernet.edu.cn/g' \
-        -e 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' \
-        /etc/apt/sources.list; \
-    apt-get update; \
+# Initialize
+RUN apt-get update; \
     apt-get install -y -f curl ca-certificates openssl git tar sqlite3 fontconfig tzdata iproute2 gettext-base wget;
 
 # Install Python 3.12 for MCDR
