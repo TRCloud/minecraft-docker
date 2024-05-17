@@ -15,7 +15,7 @@ RUN sed \
 ARG TYPE
 ARG PYTHON=3.12.3
 RUN if [ "${TYPE}" = "mcdr" ]; then \
-        apt-get install -y build-essential libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev; \
+        apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl git; \
         cd /tmp; \
         wget https://www.python.org/ftp/python/${PYTHON}/Python-${PYTHON}.tgz; \
         tar -xzvf Python-${PYTHON}.tgz; \
@@ -43,7 +43,7 @@ RUN if [ "${TYPE}" = "mcdr" ]; then \
         rm -rf /requirements.txt; \
         rm -rf /tmp/Python-${PYTHON}; \
         rm -rf /tmp/Python-${PYTHON}.tgz; \
-        apt-get remove -y build-essential libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev; \
+        apt-get remove -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl git; \
     fi; \
     apt-get autoremove -y; \
     apt-get clean;
