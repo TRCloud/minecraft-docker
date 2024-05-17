@@ -49,6 +49,7 @@ RUN if [ "${TYPE}" = "python" ]; then \
     apt-get clean;
 
 USER container
+RUN useradd -d /home/container -m container;
 ENV USER=container HOME=/home/container
 
 WORKDIR /workspace
