@@ -27,10 +27,10 @@ def iterate_all() -> Iterator[Context]:
 
 def cmd_build(args: argparse.Namespace):
     for ctx in iterate_all():
-        if type == "general":
+        if ctx.type == "general":
             print(f"> Building {ctx.type} image...")
             print(f"> Java: {ctx.java}")
-        if type == "mcdr":
+        if ctx.type == "mcdr":
             print(f"> Building {ctx.type} image...")
             print(f"> Java: {ctx.java}")
             print(f"> MCDR: {ctx.mcdr}")
