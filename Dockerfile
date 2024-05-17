@@ -30,16 +30,16 @@ COPY requirements.txt /requirements.txt
 ARG TYPE
 ARG MCDR_REQUIREMENT=mcdreforged
 RUN if [ "${TYPE}" = "python" ]; then \
-        python3 -m pip install -U pip; \
-        pip3 install ${MCDR_REQUIREMENT}; \
-        pip3 install -r /requirements.txt; \
+        python3.12 -m pip install -U pip; \
+        python3.12 -m pip install ${MCDR_REQUIREMENT}; \
+        python3.12 -m pip install -r /requirements.txt; \
     fi;
 
 # Clean up
 ARG TYPE
 RUN if [ "${TYPE}" = "python" ]; then \
         cd /tmp; \
-        pip3 cache purge; \
+        python3.12 -m pip cache purge; \
         rm -rf /requirements.txt; \
         rm -rf /tmp/Python-${PYTHON}; \
         rm -rf /tmp/Python-${PYTHON}.tgz; \
