@@ -4,7 +4,7 @@ FROM ${IMAGE_BASE}:${JAVA}-latest
 
 # Initialize
 RUN apt-get update; \
-    apt-get install -y -f curl ca-certificates openssl git tar sqlite3 fontconfig tzdata iproute2 gettext-base wget;
+    apt-get install -y -f curl ca-certificates openssl git tar sqlite3 fontconfig tzdata iproute2 gettext-base wget libargon2-1;
 
 # Install Python 3.12 for MCDR
 ARG TYPE
